@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Sleep Alarm</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Animated night sky background -->
+  <div class="sky">
+    <div class="stars"></div>
+    <div class="moon"></div>
+  </div>
+
+  <div class="app">
+
+    <!-- Header -->
+    <header class="app-header">
+      <h1>Smart Sleep Alarm</h1>
+      <p class="tagline">Wind down, wake up right.</p>
+    </header>
+
+    <!-- Live Clock -->
+    <section class="clock-card">
+      <div class="clock" id="clock">00:00:00</div>
+      <div class="date" id="dateDisplay">Loading date...</div>
+      <button id="formatToggle" class="ghost-btn">Switch to 12-hour</button>
+    </section>
+
+    <!-- Alarm Setup -->
+    <section class="card">
+      <h2>Set Alarm</h2>
+      <div class="alarm-setup">
+        <div class="time-select">
+          <select id="hourSelect" aria-label="Hour"></select>
+          <span class="colon">:</span>
+          <select id="minuteSelect" aria-label="Minute"></select>
+          <select id="ampmSelect" aria-label="AM or PM" class="ampm-select">
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+          </select>
+        </div>
+        <button id="setAlarmBtn" class="primary-btn">Set Alarm</button>
+      </div>
+
+      <div class="alarm-status" id="alarmStatus">No alarm set</div>
+
+      <!-- Alarm list -->
+      <ul class="alarm-list" id="alarmList"></ul>
+    </section>
+
+    <!-- Sleep Sounds -->
+    <section class="card">
+      <h2>Sleep Sounds</h2>
+      <div class="sound-grid" id="soundGrid">
+        <button class="sound-btn" data-sound="rain">
+          <span class="sound-icon">🌧️</span>
+          <span>Rain</span>
+        </button>
+        <button class="sound-btn" data-sound="ocean">
+          <span class="sound-icon">🌊</span>
+          <span>Ocean Waves</span>
+        </button>
+        <button class="sound-btn" data-sound="piano">
+          <span class="sound-icon">🎹</span>
+          <span>Soft Piano</span>
+        </button>
+      </div>
+
+      <div class="sound-controls">
+        <div class="now-playing" id="nowPlaying">Nothing playing</div>
+        <button id="stopSoundBtn" class="ghost-btn">Stop Sound</button>
+      </div>
+
+      <!-- Sleep timer -->
+      <div class="sleep-timer">
+        <h3>Sleep Timer</h3>
+        <div class="timer-options">
+          <button class="timer-btn" data-mins="15">15 min</button>
+          <button class="timer-btn" data-mins="30">30 min</button>
+          <button class="timer-btn" data-mins="60">1 hour</button>
+          <button class="timer-btn" data-mins="0">Off</button>
+        </div>
+        <div class="timer-display" id="timerDisplay">Timer: off</div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Alarm ringing overlay -->
+  <div class="alarm-overlay" id="alarmOverlay">
+    <div class="alarm-overlay-content">
+      <div class="bell" id="bell">⏰</div>
+      <h2>Wake up!</h2>
+      <p id="alarmTimeText">It's time</p>
+      <div class="overlay-buttons">
+        <button id="snoozeBtn" class="primary-btn snooze">Snooze 5 min</button>
+        <button id="stopAlarmBtn" class="primary-btn stop">Stop</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- In-app notification toast -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Audio elements -->
+  <!-- Default alarm sound -->
+  <audio id="alarmAudio" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" loop preload="auto"></audio>
+
+  <!-- Ambient sleep sounds -->
+  <audio id="rainAudio" src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_0959e9b9a4.mp3?filename=rain-and-thunder-16705.mp3" loop preload="none"></audio>
+  <audio id="oceanAudio" src="https://cdn.pixabay.com/download/audio/2021/09/06/audio_9d3a0ed5db.mp3?filename=ocean-waves-112762.mp3" loop preload="none"></audio>
+  <audio id="pianoAudio" src="https://cdn.pixabay.com/download/audio/2022/02/22/audio_d0c6ff1bad.mp3?filename=soft-piano-100-bpm-121529.mp3" loop preload="none"></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>

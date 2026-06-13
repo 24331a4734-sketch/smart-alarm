@@ -1,0 +1,587 @@
+/* ===================================================
+   Smart Sleep Alarm — Styles
+   Theme: deep night sky, soft glow accents
+=================================================== */
+
+:root {
+  --bg-deep: #0b1024;
+  --bg-mid: #131a35;
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --text-main: #eef1ff;
+  --text-dim: #9aa3c7;
+  --accent: #8d7bff;
+  --accent-soft: #5d6bff;
+  --accent-warm: #ffb86b;
+  --danger: #ff6b81;
+  --success: #6bffb8;
+  --radius: 18px;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 100%);
+  color: var(--text-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ===================== Night Sky Background ===================== */
+
+.sky {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(2px 2px at 20% 30%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 70% 10%, #fff, transparent),
+    radial-gradient(1px 1px at 40% 70%, #fff, transparent),
+    radial-gradient(2px 2px at 90% 40%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 10% 80%, #fff, transparent),
+    radial-gradient(1px 1px at 55% 50%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 80% 85%, #fff, transparent),
+    radial-gradient(1px 1px at 30% 15%, #fff, transparent);
+  background-repeat: repeat;
+  background-size: 100% 100%;
+  opacity: 0.6;
+  animation: twinkle 4s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.35; }
+  to { opacity: 0.8; }
+}
+
+.moon {
+  position: absolute;
+  top: 8%;
+  right: 8%;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fffdf2, #ffe9a8 60%, #cdb37a 100%);
+  box-shadow: 0 0 60px 20px rgba(255, 233, 168, 0.25);
+  animation: float 8s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+/* ===================== Layout ===================== */
+
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 32px 18px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.app-header h1 {
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-warm));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.tagline {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+/* ===================== Cards ===================== */
+
+.card, .clock-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 22px;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow);
+  animation: fadeIn 0.6s ease both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card h2 {
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.card h3 {
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+  color: var(--text-dim);
+  font-weight: 600;
+}
+
+/* ===================== Clock ===================== */
+
+.clock-card {
+  text-align: center;
+}
+
+.clock {
+  font-size: 3.4rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 20px rgba(141, 123, 255, 0.4);
+  transition: opacity 0.3s ease;
+}
+
+.date {
+  color: var(--text-dim);
+  margin-top: 6px;
+  font-size: 0.95rem;
+}
+
+/* ===================== Buttons ===================== */
+
+.primary-btn {
+  background: linear-gradient(135deg, var(--accent), var(--accent-soft));
+  color: #fff;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.2s ease;
+  box-shadow: 0 6px 18px rgba(141, 123, 255, 0.3);
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(141, 123, 255, 0.4);
+}
+
+.primary-btn:active {
+  transform: translateY(0px) scale(0.98);
+}
+
+.primary-btn.stop {
+  background: linear-gradient(135deg, var(--danger), #ff8c9c);
+  box-shadow: 0 6px 18px rgba(255, 107, 129, 0.35);
+}
+
+.primary-btn.snooze {
+  background: linear-gradient(135deg, var(--accent-warm), #ffd29b);
+  color: #2b1d00;
+  box-shadow: 0 6px 18px rgba(255, 184, 107, 0.35);
+}
+
+.ghost-btn {
+  background: transparent;
+  border: 1px solid var(--card-border);
+  color: var(--text-dim);
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 14px;
+}
+
+.ghost-btn:hover {
+  border-color: var(--accent);
+  color: var(--text-main);
+}
+
+/* ===================== Alarm Setup ===================== */
+
+.alarm-setup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  justify-content: space-between;
+}
+
+.time-select {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.time-select select {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--text-main);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 1.1rem;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.time-select select:focus {
+  border-color: var(--accent);
+}
+
+.colon {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-dim);
+}
+
+.ampm-select {
+  margin-left: 4px;
+}
+
+.alarm-status {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px dashed var(--card-border);
+  transition: all 0.3s ease;
+}
+
+.alarm-status.active {
+  color: var(--success);
+  border-color: var(--success);
+  box-shadow: 0 0 16px rgba(107, 255, 184, 0.15);
+}
+
+/* Pulse animation for active alarm indicator */
+.alarm-status.active::before {
+  content: "● ";
+  animation: pulse 1.4s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+/* ===================== Alarm List ===================== */
+
+.alarm-list {
+  list-style: none;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.alarm-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 10px 14px;
+  animation: fadeIn 0.4s ease both;
+}
+
+.alarm-list .alarm-time {
+  font-size: 1.15rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.alarm-list .alarm-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.icon-btn:hover {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.icon-btn.delete:hover {
+  color: var(--danger);
+}
+
+/* Toggle switch for enabling/disabling an alarm */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 22px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider-toggle {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 22px;
+  transition: 0.3s;
+}
+
+.slider-toggle::before {
+  content: "";
+  position: absolute;
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.switch input:checked + .slider-toggle {
+  background-color: var(--accent);
+}
+
+.switch input:checked + .slider-toggle::before {
+  transform: translateX(18px);
+}
+
+/* ===================== Sound Grid ===================== */
+
+.sound-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.sound-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  color: var(--text-main);
+  padding: 16px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.sound-btn .sound-icon {
+  font-size: 1.6rem;
+}
+
+.sound-btn:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.sound-btn.playing {
+  border-color: var(--accent);
+  background: rgba(141, 123, 255, 0.12);
+  box-shadow: 0 0 16px rgba(141, 123, 255, 0.25);
+}
+
+.sound-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.now-playing {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+
+/* ===================== Sleep Timer ===================== */
+
+.sleep-timer {
+  margin-top: 24px;
+  border-top: 1px solid var(--card-border);
+  padding-top: 18px;
+}
+
+.timer-options {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.timer-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--card-border);
+  color: var(--text-main);
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.timer-btn:hover {
+  border-color: var(--accent);
+}
+
+.timer-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.timer-display {
+  margin-top: 12px;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ===================== Alarm Ringing Overlay ===================== */
+
+.alarm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 10, 28, 0.92);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  backdrop-filter: blur(6px);
+}
+
+.alarm-overlay.show {
+  display: flex;
+  animation: fadeIn 0.4s ease both;
+}
+
+.alarm-overlay-content {
+  text-align: center;
+  padding: 30px;
+}
+
+.bell {
+  font-size: 5rem;
+  display: inline-block;
+  animation: shake 0.6s infinite;
+}
+
+/* Visual "vibration" simulation when alarm rings */
+@keyframes shake {
+  0%, 100% { transform: rotate(0deg) translateX(0); }
+  20% { transform: rotate(-12deg) translateX(-4px); }
+  40% { transform: rotate(10deg) translateX(4px); }
+  60% { transform: rotate(-8deg) translateX(-3px); }
+  80% { transform: rotate(6deg) translateX(3px); }
+}
+
+.alarm-overlay-content h2 {
+  margin-top: 12px;
+  font-size: 1.8rem;
+}
+
+.alarm-overlay-content p {
+  color: var(--text-dim);
+  margin-top: 6px;
+}
+
+.overlay-buttons {
+  margin-top: 26px;
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Shake the whole screen slightly to simulate vibration */
+.app.vibrate {
+  animation: screen-shake 0.3s infinite;
+}
+
+@keyframes screen-shake {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(1px, -1px); }
+  50% { transform: translate(-1px, 1px); }
+  75% { transform: translate(1px, 1px); }
+}
+
+/* ===================== Toast Notification ===================== */
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: rgba(20, 25, 50, 0.95);
+  border: 1px solid var(--card-border);
+  color: var(--text-main);
+  padding: 12px 22px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.35s ease;
+  z-index: 1000;
+  box-shadow: var(--shadow);
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ===================== Responsive ===================== */
+
+@media (max-width: 420px) {
+  .clock { font-size: 2.6rem; }
+  .sound-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .sound-btn { padding: 12px 4px; font-size: 0.75rem; }
+  .alarm-setup { justify-content: center; }
+}
